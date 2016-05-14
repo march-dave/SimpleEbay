@@ -18,6 +18,8 @@
   "dependencies": {
     "angular": "^1.5.5",
     "angular-ui-router": "^0.2.18",
-    "stormpath-sdk-angularjs": "^1.0.0"
+    "stormpath-sdk-angularjs": "^1.0.0",
+    "bootstrap": "^3.3.6",
+    "Materialize": "materialize#^0.97.6"
   }
 }
