@@ -1,3 +1,6 @@
+'use strict';
+require('dotenv').load();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,6 +14,15 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var mongoose = require('mongoose');
+const MONGOURL = process.env.MONGODB_URI || 'mongodb://localhost:simpleebay-app'
+mongoose.connect(MONGOURL, err => {
+    console.log(err || `Connected to MongoDB at ${MONGOURL}`);
+});
+
+console.log('MONGOURL:', MONGOURL);
+
 
 app.use(stormpath.init(app, {
   web: {

@@ -26,5 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
      })
 
+    .state('quotes', {url:'/quotes', templateUrl: '/html/quotes.html', controller: 'quotes'})
+
   $urlRouterProvider.otherwise('/')
 });

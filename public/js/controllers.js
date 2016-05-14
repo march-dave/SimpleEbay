@@ -54,3 +54,9 @@ app.controller('profileCtrl', function($scope, $user, $timeout) {
     })
   }
 });
+
+app.controller('quotes', function($scope, $state) {
+
+  console.log('quotes');
+
+});
