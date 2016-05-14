@@ -5,10 +5,36 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var stormpath = require('express-stormpath');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.use(stormpath.init(app, {
+  web: {
+    me: {
+      expand: {
+        customData: true
+      }
+    }
+  },
+    register: {
+      form: {
+        fields: {
+          favoriteColor: {
+            enabled: true,
+            label: 'Favorite Color',
+            name: 'favoriteColor',
+            placeholder: 'E.g. Red, Blue',
+            required: true,
+            type: 'text'
+          }
+        }
+      }
+    }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +81,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;
