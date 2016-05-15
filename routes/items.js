@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
-var User = require('../models/user');
+var Item = require('../models/item');
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -11,18 +10,18 @@ var User = require('../models/user');
 
 router.route('/')
     .get((req, res) => {
-      User.find({}, (err, users) => {
+      Item.find({}, (err, items) => {
           if(err) {
             res.status(400).send(err);
           } else {
-            res.send(users);
+            res.send(items);
           }
         });
     })
     .post((req, res) => {
-      var user = new User(req.body);
-      user.save((err, savedUser) => {
-        res.status(err ? 400 : 200).send(err || savedUser);
+      var item = new Item(req.body);
+      item.save((err, savedItem) => {
+        res.status(err ? 400 : 200).send(err || savedItem);
       });
   })
 

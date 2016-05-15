@@ -12,17 +12,16 @@ var stormpath = require('express-stormpath');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var items = require('./routes/items');
+var bids = require('./routes/bids');
 
 var app = express();
 
 var mongoose = require('mongoose');
-const MONGOURL = process.env.MONGODB_URI || 'mongodb://localhost:simpleebay-app'
+const MONGOURL = process.env.MONGODB_URI || 'mongodb://localhost:/simpleebay-app'
 mongoose.connect(MONGOURL, err => {
     console.log(err || `Connected to MongoDB at ${MONGOURL}`);
 });
-
-console.log('MONGOURL:', MONGOURL);
-
 
 app.use(stormpath.init(app, {
   web: {
@@ -62,6 +61,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/items', items);
+app.use('/bids', bids);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

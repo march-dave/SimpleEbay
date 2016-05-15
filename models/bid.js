@@ -1,31 +1,13 @@
 'use strict';
 
-
-var monogoose = require('monogoose');
+var mongoose = require('mongoose');
 
 var bidSchema = new mongoose.Schema({
-  name: {type: String}
+  name: {type: String},
+  bidding: {type: Number},
+  itemref: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
+  userref: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 });
 
 var Bid = mongoose.model('Bid', bidSchema);
 module.exports = Bid;
-
-// function remove(str, obj) {
-//
-//   return str.split('').filter('').join('');
-//
-// }
-
-//
-// var obj = { 't': 1, 'v': 2 };
-//
-// for (var char in obj) {
-//
-//   for(var i=0; i<obj[char]; i++) {
-//
-//     var index = str.indexOf(char);
-//
-//   }
-//
-//   console.log(char);
-// }
