@@ -10,6 +10,7 @@ app.run(function($stormpath){
 });
 
 app.config(function($stateProvider, $urlRouterProvider) {
+
   $stateProvider
     .state('home', { url: '/', templateUrl: '/html/home.html' })
     .state('login', { url: '/login', templateUrl: '/html/login.html' })
@@ -24,9 +25,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
     //   }
     // }
 
+    //
      })
-
-    .state('quotes', {url:'/quotes', templateUrl: '/html/quotes.html', controller: 'quotes'})
+    .state('quotes', {
+      url:'/quotes',
+      templateUrl: '/html/quotes.html',
+      controller: 'quotesCtrl'
+      ,resolve: {
+        SimpleEBayResolve: function(SimpleEBayService) {
+          return SimpleEBayService.getItemAll();
+          // return 'SimpleEBayService.getItemAll();'
+        }
+      }
+    })
 
   $urlRouterProvider.otherwise('/')
 });

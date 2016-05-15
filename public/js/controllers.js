@@ -2,7 +2,7 @@
 
 var app = angular.module('spApp');
 
-app.controller('profileCtrl', function($scope, $user, $timeout) {
+app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayService) {
 
   $scope.loading = true;
   // $scope.user = USER;
@@ -37,26 +37,35 @@ app.controller('profileCtrl', function($scope, $user, $timeout) {
     $scope.editing = null;
   }
 
-  $scope.saveEdit = () => {
+  // $scope.saveEdit = () => {
+  //
+  //   $http.put('/users/me', $scope.editUser)
+  //   .then(res=> {
+  //
+  //       $user.get()
+  //         .then(user => {
+  //           $scope.user = res.data;
+  //           $scope.cancelEdit();
+  //         })
+  //     // console.log('res'), res;
+  //   })
+  //   .catch(err => {
+  //     console.log('err', err);
+  //   })
+  // }
 
-    $http.put('/users/me', $scope.editUser)
-    .then(res=> {
-
-        $user.get()
-          .then(user => {
-            $scope.user = res.data;
-            $scope.cancelEdit();
-          })
-      // console.log('res'), res;
-    })
-    .catch(err => {
-      console.log('err', err);
-    })
-  }
 });
 
-app.controller('quotes', function($scope, $state) {
+app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve) {
 
-  console.log('quotes');
+  // console.log($state);
+  // console.log('SimpleEBayService');
+
+  // SimpleEBayService.getItemAll().then(function(res) {
+  //   console.log('res', res);
+  //   console.log('res', res.data);
+  // })
+
+  console.log('SimpleEBayResolve: ', SimpleEBayResolve);
 
 });
