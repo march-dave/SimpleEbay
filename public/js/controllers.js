@@ -57,14 +57,15 @@ app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayServic
 
 app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve, SimpleEBayService, $rootScope) {
 
-  console.log('rootScope: ', $rootScope);
-
   $scope.items = SimpleEBayResolve;
-
   $scope.addBidding = function(newBid, itemID) {
 
       newBid.itemref = itemID;
       SimpleEBayService.addBid(newBid);
   };
+
+  SimpleEBayService.getBidAll().then(function (data) {
+      $scope.bids = data;
+  });
 
 });

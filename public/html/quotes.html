@@ -83,24 +83,24 @@
       <th>Bid Time</th>
   </tr></thead>
   <tbody>
-    <tr>
+    <tr ng-repeat='bid in bids'>
       <td>
         <h4 class="ui image header">
           <i class="user icon"></i>
           <div class="content">
-            i***v
-            <div class="sub header">( 594Feedback score is 500 to 999)
+            {{ bid.name }}
+            <div class="sub header">
           </div>
         </div>
       </h4></td>
       <td>
-        US $9.99
+        {{ bid.bidding }}
       </td>
       <td>
-        May-13-16 20:35:45 PDT
+        {{ bid.biddingTime }}
       </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td>
         <h4 class="ui image header">
           <i class="user icon"></i>
@@ -141,6 +141,6 @@
       <td>
         11
       </td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>

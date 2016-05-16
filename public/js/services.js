@@ -8,6 +8,17 @@ app.service('SimpleEBayService', function($http, $q) {
   //   return $http.get('/items');
   // }
 
+  this.getBidAll = () => {
+      // return $http.get('/bids').then(res=>$q.resolve(res.data));
+
+      return $http({
+        method: "GET",
+        url: `/bids`,
+        cache: false
+      })
+      .then(res => $q.resolve(res.data));
+  };
+
   this.getItemAll = () => {
     return $http({
       method: "GET",
