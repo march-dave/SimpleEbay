@@ -53,17 +53,16 @@ app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayServic
   //     console.log('err', err);
   //   })
   // }
-
 });
 
 app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve, SimpleEBayService) {
 
   $scope.items = SimpleEBayResolve;
 
-  $scope.addBidding = function() {
-      // console.log('addBidding 1', $scope.newBid.price);
-      var obj = $scope.newBid.price;
-      SimpleEBayService.addBid(obj);
+  $scope.addBidding = function(newBid, itemID) {
+
+      newBid.itemref = itemID;
+      SimpleEBayService.addBid(newBid);
   };
 
 });

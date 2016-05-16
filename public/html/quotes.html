@@ -28,7 +28,9 @@
   <div ng-repeat='item in items'>
     <div class="ui link cards" >
           <div class="card">
+
             <div class="image">
+              <div class="header" ng-model='newBid._id' ng-bind='item._id'></div>
               <img ng-src='{{ item.image }}'>
             </div>
 
@@ -43,37 +45,34 @@
               <span class="right floated">
                 {{ item.bidtime }}
               </span>
-              <span>
-                <i class="user icon"></i>
-                75 viewed
-              </span>
             </div>
           </div>
     </div>
+
+  <br />
+  <br />
+  <br />
+
+    <div class="ui left action input">
+      <button class="ui gray labeled icon button">
+        <i class="dollar icon"></i>
+        Starting bid
+      </button>
+      <input type="text" value="$75.00">
+    </div>
+
+    <br />
+    <br />
+
+    <div class="ui left action input">
+      <button class="ui green labeled icon button">
+        <i class="dollar icon"></i>
+        Bidding
+      </button>
+      <input type="text" value="150.47" ng-model='newBid.bidding'>&nbsp;<button class="ui green button" ng-click='addBidding(newBid, item._id)'>bid</button>
+    </<div></div>>
   </div>
 
-  <br />
-  <br />
-  <br />
-
-  <div class="ui left action input">
-    <button class="ui gray labeled icon button">
-      <i class="dollar icon"></i>
-      Starting bid
-    </button>
-    <input type="text" value="$75.00">
-  </div>
-
-  <br />
-  <br />
-
-  <div class="ui left action input">
-    <button class="ui green labeled icon button">
-      <i class="dollar icon"></i>
-      Bidding
-    </button>
-    <input type="text" value="$120.03" ng-model='newBid.price'>&nbsp;<button class="ui green button" ng-click='addBidding()'>bid</button>
-  </div>
 </div>
 
 <table class="ui very basic collapsing celled table">
