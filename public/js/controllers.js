@@ -37,25 +37,27 @@ app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayServic
     $scope.editing = null;
   }
 
-  // $scope.saveEdit = () => {
-  //
-  //   $http.put('/users/me', $scope.editUser)
-  //   .then(res=> {
-  //
-  //       $user.get()
-  //         .then(user => {
-  //           $scope.user = res.data;
-  //           $scope.cancelEdit();
-  //         })
-  //     // console.log('res'), res;
-  //   })
-  //   .catch(err => {
-  //     console.log('err', err);
-  //   })
-  // }
+  $scope.saveEdit = () => {
+
+    $http.put('/users/me', $scope.editUser)
+    .then(res=> {
+
+        $user.get()
+          .then(user => {
+            $scope.user = res.data;
+            $scope.cancelEdit();
+          })
+      // console.log('res'), res;
+    })
+    .catch(err => {
+      console.log('err', err);
+    })
+  }
 });
 
-app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve, SimpleEBayService) {
+app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve, SimpleEBayService, $rootScope) {
+
+  console.log('rootScope: ', $rootScope);
 
   $scope.items = SimpleEBayResolve;
 

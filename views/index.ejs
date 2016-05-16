@@ -7,6 +7,7 @@
 
     <link rel='stylesheet' href='/css/style.css' />
 
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/semantic/dist/semantic.min.js"></script>
@@ -17,6 +18,7 @@
     <script src="/js/controllers.js"></script>
     <script src="/js/services.js"></script>
 
+  </head>
   </head>
   <body ng-app='spApp'>
     <div class='container'>
@@ -30,12 +32,9 @@
     <a if-user ui-sref='logout' sp-logout>Logout</a>
 
     <!-- <a if-user ui-sref='quotes' sp-logout>My Quotes</a> -->
-    <a if-not-user ui-sref='quotes' sp-logout>My Quotes</a>
+    <a if-not-user ui-sref='quotes'>My Quotes</a>
 
     <ui-view></ui-view>
-
-    <!-- <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p> -->
 
     </div>
   </body>
