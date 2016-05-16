@@ -2,7 +2,7 @@
 
 <div class='container'>
 
-  <div class="ui link cards">
+  <!-- <div class="ui link cards">
     <div class="card">
       <div class="image">
         <img src="https://i.ytimg.com/vi/r3Ui4cPSMmQ/maxresdefault.jpg">
@@ -22,6 +22,33 @@
           75 viewed
         </span>
       </div>
+    </div>
+  </div> -->
+
+  <div ng-repeat='item in items'>
+    <div class="ui link cards" >
+          <div class="card">
+            <div class="image">
+              <img ng-src='{{ item.image }}'>
+            </div>
+
+            <div class="content">
+              <div class="header">{{ item.title }}</div>
+              <div class="description">
+                {{ item.detail }}
+              </div>
+            </div>
+
+            <div class="extra content">
+              <span class="right floated">
+                {{ item.bidtime }}
+              </span>
+              <span>
+                <i class="user icon"></i>
+                75 viewed
+              </span>
+            </div>
+          </div>
     </div>
   </div>
 
@@ -45,7 +72,7 @@
       <i class="dollar icon"></i>
       Bidding
     </button>
-    <input type="text" value="$120.03">&nbsp;<button class="ui green button">bid</button>
+    <input type="text" value="$120.03" ng-model='newBid.price'>&nbsp;<button class="ui green button" ng-click='addBidding()'>bid</button>
   </div>
 </div>
 

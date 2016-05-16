@@ -4,21 +4,41 @@ var app = angular.module('spApp');
 
 // localhost:3000/items
 app.service('SimpleEBayService', function($http, $q) {
-
-  console.log('service getItemAllaaaa');
+  // this.getItemAll = () => {
+  //   return $http.get('/items');
+  // }
 
   this.getItemAll = () => {
-    return $http.get('/items');
-  }
+    return $http({
+      method: "GET",
+      url: `/items`,
+      cache: false
+    })
+    .then(res => $q.resolve(res.data));
+  };
 
-  // this.getItemAll = () => {
-  //   return $http({
-  //     method: "GET",
-  //     url: `/items`,
-  //     cache: false
-  //   })
-  //   .then(res => $q.resolve(res.data));
-  // };
+  this.addBid = function(bid) {
+
+    var obj = {
+       userref: '5737b23dfcb058aef76059f9',
+       itemref: '5737c1409041926bf8a741f6',
+       bidding: bid,
+       name: 'name field2'
+    };
+
+    console.log('bid', obj);
+    return $http.post(`/bids/addBid`, obj);
+
+    // return $http({
+    //   method: "POST",
+    //   url: `/bids/addBid`,
+    //   data: { bid: bid },
+    //   cache: false
+    // })
+    // .then();
+
+
+  };
 
 });
 

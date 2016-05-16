@@ -56,16 +56,14 @@ app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayServic
 
 });
 
-app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve) {
+app.controller('quotesCtrl', function($scope, $state, SimpleEBayResolve, SimpleEBayService) {
 
-  // console.log($state);
-  // console.log('SimpleEBayService');
+  $scope.items = SimpleEBayResolve;
 
-  // SimpleEBayService.getItemAll().then(function(res) {
-  //   console.log('res', res);
-  //   console.log('res', res.data);
-  // })
-
-  console.log('SimpleEBayResolve: ', SimpleEBayResolve);
+  $scope.addBidding = function() {
+      // console.log('addBidding 1', $scope.newBid.price);
+      var obj = $scope.newBid.price;
+      SimpleEBayService.addBid(obj);
+  };
 
 });

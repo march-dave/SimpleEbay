@@ -30,14 +30,21 @@ router.route('/')
   // router.put('/addBid', (req, res) => {
   router.put('/:userref/addBid/:itemref', (req, res) => {
 
-      // var userref = req.params.userref;
-      // var itemref = req.params.itemref;
-
       var bid = new Bid();
       bid.itemref = req.params.userref;
       bid.userref = req.params.itemref;
-      bid.bidding = '70';
+      bid.bidding = req.body;
       bid.name = 'test Name';
+
+      bid.save((err, savedBid) => {
+        res.status(err ? 400 : 200).send(err);
+      });
+  });
+
+  router.post('/addBid', (req, res) => {
+      var bid = new Bid(req.body);
+
+      console.log('req.body', bid);
 
       bid.save((err, savedBid) => {
         res.status(err ? 400 : 200).send(err);
