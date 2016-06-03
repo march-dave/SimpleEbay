@@ -1,31 +1,24 @@
 'use strict';
 
-var app = angular.module('spApp', ['ui.router', 'stormpath', 'stormpath.templates']);
+// var app = angular.module('spApp', ['ui.router', 'stormpath', 'stormpath.templates']);
+var app = angular.module('spApp', ['ui.router', 'satellizer']);
 
-app.run(function($stormpath){
-  $stormpath.uiRouter({
-    loginState: 'login',
-    defaultPostLoginState: 'home'
-  });
-});
+// app.run(function($stormpath){
+//   $stormpath.uiRouter({
+//     loginState: 'login',
+//     defaultPostLoginState: 'home'
+//   });
+// });
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('home', { url: '/', templateUrl: '/html/home.html' })
-    .state('login', { url: '/login', templateUrl: '/html/login.html' })
+    .state('login', { url: '/login', templateUrl: '/html/authForm.html' })
     .state('register', { url: '/register', templateUrl: '/html/register.html' })
 
     .state('profile', { url: '/profile', templateUrl: '/html/profile.html',
-    controller: 'profileCtrl', sp: {authenticate: true}
-
-    // resolve: {
-    //   USER: function($user) {
-    //     return $user.get();
-    //   }
-    // }
-
-    //
+    controller: 'profileCtrl'
      })
     .state('quotes', {
       url:'/quotes',
@@ -40,4 +33,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 
   $urlRouterProvider.otherwise('/')
+});
+
+app.filter('titlecase', function() {
+  return function(input) {
+    return input[0].toUpperCase() + input.slice(1).toLowerCase();
+  };
 });

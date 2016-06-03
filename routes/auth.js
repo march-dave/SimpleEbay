@@ -13,7 +13,6 @@ router.post('/login', (req, res) => {
     res.send({ token: token });
   });
 });
-
 router.post('/signup', (req, res) => {
   User.register(req.body, (err, user) => {
     if(err) return res.status(400).send(err);

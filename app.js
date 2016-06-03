@@ -8,12 +8,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var stormpath = require('express-stormpath');
+// var stormpath = require('express-stormpath');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var items = require('./routes/items');
-var bids = require('./routes/bids');
 
 var app = express();
 
@@ -23,29 +19,29 @@ mongoose.connect(MONGOURL, err => {
     console.log(err || `Connected to MongoDB at ${MONGOURL}`);
 });
 
-app.use(stormpath.init(app, {
-  web: {
-    me: {
-      expand: {
-        customData: true
-      }
-    }
-  },
-    register: {
-      form: {
-        fields: {
-          favoriteColor: {
-            enabled: true,
-            label: 'Favorite Color',
-            name: 'favoriteColor',
-            placeholder: 'E.g. Red, Blue',
-            required: true,
-            type: 'text'
-          }
-        }
-      }
-    }
-}));
+// app.use(stormpath.init(app, {
+//   web: {
+//     me: {
+//       expand: {
+//         customData: true
+//       }
+//     }
+//   },
+//     register: {
+//       form: {
+//         fields: {
+//           favoriteColor: {
+//             enabled: true,
+//             label: 'Favorite Color',
+//             name: 'favoriteColor',
+//             placeholder: 'E.g. Red, Blue',
+//             required: true,
+//             type: 'text'
+//           }
+//         }
+//       }
+//     }
+// }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,10 +55,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/items', items);
-app.use('/bids', bids);
+app.use('/api', require('./routes/api'));
+
+app.use('/users', require('./routes/users') );
+app.use('/items', require('./routes/items') );
+app.use('/bids', require('./routes/bids'));
+app.use('/', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -94,8 +92,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-
 
 module.exports = app;
