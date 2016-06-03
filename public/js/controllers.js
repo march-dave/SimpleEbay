@@ -2,12 +2,11 @@
 
 var app = angular.module('spApp');
 
-
 app.controller('profileCtrl', function($scope) {
   // console.log('profileCtrl!');
   // $scope.editUser();
 
-  //  console.log($scope.editUser()); 
+  //  console.log($scope.editUser());
 });
 
 app.controller('mainCtrl', function($scope, $state, $auth) {
@@ -68,9 +67,7 @@ app.controller('authFormCtrl', function($scope, $state, $auth) {
         })
     }
   };
-
 });
-
 
 app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayService) {
 
