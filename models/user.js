@@ -20,11 +20,9 @@ var userSchema = new mongoose.Schema({
 });
 
 // IT'S MIDDLEWARE!!
+// IT'S MIDDLEWARE!!
 userSchema.statics.isLoggedIn = function(req, res, next) {
-  if (!req.header('Authorization')) {
-    return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
-  }
-  var token = req.header('Authorization').split(' ')[1];
+  var token = req.cookies.accessToken;
 
   jwt.verify(token, JWT_SECRET, (err, payload) => {
     if(err) return res.status(401).send({error: 'Must be authenticated.'});
@@ -34,20 +32,41 @@ userSchema.statics.isLoggedIn = function(req, res, next) {
       .select({password: false})
       .exec((err, user) => {
         if(err || !user) {
-          return res.status(400).send(err || {error: 'User not found.'});
+          return res.clearCookie('accessToken').status(400).send(err || {error: 'User not found.'});
         }
 
         req.user = user;
         next();
-      });
+      })
   });
 };
+// userSchema.statics.isLoggedIn = function(req, res, next) {
+//   if (!req.header('Authorization')) {
+//     return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
+//   }
+//   var token = req.header('Authorization').split(' ')[1];
+//
+//   jwt.verify(token, JWT_SECRET, (err, payload) => {
+//     if(err) return res.status(401).send({error: 'Must be authenticated.'});
+//
+//     User
+//       .findById(payload._id)
+//       .select({password: false})
+//       .exec((err, user) => {
+//         if(err || !user) {
+//           return res.status(400).send(err || {error: 'User not found.'});
+//         }
+//
+//         req.user = user;
+//         next();
+//       });
+//   });
+// };
 
 userSchema.statics.register = function(userObj, cb) {
-  console.log('userObj:', userObj);
+
   User.findOne({email: userObj.email}, (err, dbUser) => {
-    console.log(err, dbUser);
-    if(err || dbUser) return cb(err || { error: 'Email not available.' })
+    // if(err || dbUser) return cb(err || { error: 'Email not available.' })
 
     bcrypt.hash(userObj.password, 12, (err, hash) => {
       if(err) return cb(err);
@@ -57,7 +76,7 @@ userSchema.statics.register = function(userObj, cb) {
         password: hash
       });
 
-      console.log('user to save:', user);
+      // console.log('user to save:', user);
 
       user.save(cb);
     });
@@ -76,6 +95,21 @@ userSchema.statics.authenticate = function(userObj, cb) {
       cb(null, token);
     });
   });
+};
+
+userSchema.statics.profileUpdate = function(userObj, cb) {
+
+  User.findOne({username: userObj.username}, (err, dbUser) => {
+
+    if(err) return res.status(400).send(err);
+
+    dbUser.like = userObj.like;
+    dbUser.count = userObj.count;
+
+    dbUser.save();
+
+  });
+  // this.create(userObj, cb);
 };
 
 

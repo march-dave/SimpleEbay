@@ -8,7 +8,7 @@
 
 <button class='btn btn-lg' ng-click='edit()'>EDIT!</button>
 
-<form ng-show='editing'>
+<form ng-show='editing' ng-submit="submitEdit()">
 
   <!-- <div class="form-group"><lable>Id</lable> <input type="text" ng-model='editUser._id' class='form-control' ></div> -->
   <div class="form-group"><lable>First Name</lable> <input type="text" ng-model='editUser.firstname' class='form-control' ></div>
