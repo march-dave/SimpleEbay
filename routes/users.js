@@ -53,9 +53,6 @@ var User = require('../models/user');
 
 router.get('/', function(req, res, next) {
   // res.send('respond with a resource');
-
-  console.log('body', req.body);
-
   req.uesr = req.body;
   req.user.save((err, savedUser) => {
     res.status(err ? 400:200).send(err || savdUser);

@@ -10,6 +10,8 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     .state('register', { url: '/register', templateUrl: '/html/authForm.html', controller: 'authFormCtrl' })
     .state('profile', { url: '/profile', templateUrl: '/html/profile.html', controller: 'profileCtrl' })
 
+    // .state('logout', { url: '/profile', templateUrl: '/html/profile.html', controller: 'profileCtrl' })
+
   $urlRouterProvider.otherwise('/')
 });
 
