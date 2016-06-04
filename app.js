@@ -56,6 +56,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', require('./routes/api'));
+app.use('/auth', require('./routes/auth'));
 
 app.use('/users', require('./routes/users') );
 app.use('/items', require('./routes/items') );

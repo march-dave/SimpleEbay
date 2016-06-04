@@ -23,18 +23,22 @@
   </head>
   </head>
   <body ng-app='spApp' ng-controller='mainCtrl'>
-    <div class='container'>
 
+    Auth: {{ isAuthenticated() }}
+    <div class='container'>
     <a ui-sref='home'>Home</a>
 
-    <a if-not-user ui-sref='login'>Login</a>
-    <a if-not-user ui-sref='register'>Register</a>
+    <span ng-hide="isAuthenticated()">
+      <a if-not-user ui-sref='login'>Login</a>
+      <a if-not-user ui-sref='register'>Register</a>
+    </span>
 
-    <a if-user ui-sref='profile' sp-logout>Profile</a>
-    <a if-user ui-sref='logout' sp-logout>Logout</a>
-
-    <!-- <a if-user ui-sref='quotes' sp-logout>My Quotes</a> -->
-    <a if-not-user ui-sref='quotes'>My Quotes</a>
+    <span ng-show="isAuthenticated()">
+      <a if-user ui-sref='profile' sp-logout>Profile</a>
+      <a if-user ui-sref='logout' sp-logout>Logout</a>
+      <!-- <a if-user ui-sref='quotes' sp-logout>My Quotes</a> -->
+      <a if-not-user ui-sref='quotes'>My Quotes</a>
+    </span>
 
     <ui-view></ui-view>
 
