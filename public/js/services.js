@@ -22,6 +22,13 @@ app.service('Auth', function($http, $q) {
       });
   };
 
+  this.setProfile = userObj => {
+    return $http.delete('/api/users/profile', userObj)
+      .then(res => {
+        // return $q.resolve();
+      });
+  };
+
   this.getProfile = () => {
     return $http.get('/api/users/profile')
       .then(res => {

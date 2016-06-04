@@ -29,7 +29,6 @@ router.delete('/logout', (req, res) => {
 });
 
 // /api/users/profile
-// router.get('/profile', (req, res) => {
 router.get('/profile', User.isLoggedIn, (req, res) => {
   // console.log('req.user:', req.user);
   res.send(req.user);
@@ -37,11 +36,9 @@ router.get('/profile', User.isLoggedIn, (req, res) => {
 
 // /api/users/profile
 router.put('/profile', (req, res) => {
-
   User.profileUpdate(req.body, err => {
     res.status(err ? 400 : 200).send(err);
   });
-
 })
 
 /* GET users listing. */

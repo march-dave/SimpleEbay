@@ -13,7 +13,7 @@ app.controller('mainCtrl', function($scope, $state, Auth) {
   }, function(newVal, oldVal) {
     $scope.currentUser = newVal;
   });
-  
+
   $scope.logout = () => {
     Auth.logout()
     .then(res => {
@@ -142,10 +142,9 @@ app.controller('authFormCtrl', function($scope, $state, Auth, $auth) {
 // });
 
 // app.controller('profileCtrl', function($scope, $user, $timeout, SimpleEBayService) {
-app.controller('profileCtrl', function($scope, $timeout) {
-
+app.controller('profileCtrl', function($scope, $timeout, Auth) {
   $scope.submitEdit = () => {
-    console.log($scope.editUser);
+    Auth.setProfile($scope.user);
   }
 
   // $scope.loading = true;

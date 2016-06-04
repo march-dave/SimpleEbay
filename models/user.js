@@ -20,7 +20,6 @@ var userSchema = new mongoose.Schema({
 });
 
 // IT'S MIDDLEWARE!!
-// IT'S MIDDLEWARE!!
 userSchema.statics.isLoggedIn = function(req, res, next) {
   var token = req.cookies.accessToken;
 
@@ -99,14 +98,16 @@ userSchema.statics.authenticate = function(userObj, cb) {
 
 userSchema.statics.profileUpdate = function(userObj, cb) {
 
-  User.findOne({username: userObj.username}, (err, dbUser) => {
+  // User.findOne({username: userObj.username}, (err, dbUser) => {
+  User.findOne({email: userObj.email}, (err, dbUser) => {
 
     if(err) return res.status(400).send(err);
 
-    dbUser.like = userObj.like;
-    dbUser.count = userObj.count;
+    console.log('userObj', userObj);
 
-    dbUser.save();
+    dbUser.password = userObj.password;
+
+    dbUser.save(cb);
 
   });
   // this.create(userObj, cb);
